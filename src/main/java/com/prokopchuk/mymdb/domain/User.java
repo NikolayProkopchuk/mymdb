@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class User {
 
     private Long id;
@@ -25,9 +28,5 @@ public class User {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
-    public UserRating rate(Film film, double rating) {
-        return new UserRating(this, film, rating);
-    }
 
 }
