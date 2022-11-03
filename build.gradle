@@ -9,11 +9,16 @@ plugins {
 group = 'com.prokopchuk'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+targetCompatibility = '17'
 
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+ext {
+    postgresqlVersion = '42.5.0'
 }
 
 repositories {
@@ -23,6 +28,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.postgresql:postgresql:${postgresqlVersion}"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
@@ -38,6 +44,7 @@ checkstyle {
     configFile file("${project.rootDir}/src/main/resources/config/checkstyle.xml")
     ignoreFailures = false
     maxWarnings = 0
+    toolVersion = '10.3.1'
 }
 
 checkstyleMain {
@@ -49,4 +56,19 @@ checkstyleMain {
 checkstyleTest {
     enabled = gradle.startParameter.taskNames.contains('checkstyleTest')
     source = 'src/test/java'
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it)
+        }))
+    }
 }
