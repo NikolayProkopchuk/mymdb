@@ -2,6 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group = 'com.prokopchuk'
@@ -29,4 +31,22 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion "${checkstyle}"
+    configFile file("${project.rootDir}/src/main/resources/config/checkstyle.xml")
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
+checkstyleMain {
+    print "${project.rootDir}"
+    enabled = gradle.startParameter.taskNames.contains('checkstyleMain')
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    enabled = gradle.startParameter.taskNames.contains('checkstyleTest')
+    source = 'src/test/java'
 }
