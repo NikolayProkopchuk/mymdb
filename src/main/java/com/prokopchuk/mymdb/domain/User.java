@@ -2,7 +2,6 @@ package com.prokopchuk.mymdb.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.Data;
 
@@ -14,8 +13,6 @@ public class User {
     private String userName;
 
     private String email;
-
-    private List<Role> roles;
 
     private Sex sex;
 

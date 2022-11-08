@@ -41,7 +41,6 @@ public class FilmEntity {
     @Column(nullable = false)
     private LocalDate productionDate;
 
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
