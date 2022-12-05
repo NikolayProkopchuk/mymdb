@@ -1,5 +1,6 @@
 package com.prokopchuk.mymdb.adapter.out.persistence.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -39,6 +40,11 @@ public class UserFilmRatingEntity  {
 
     @Column(nullable = false)
     private Integer rating;
+
+    @Column(nullable = false, updatable = false)
+    LocalDateTime createdAt = LocalDateTime.now();
+
+    LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object obj) {

@@ -1,18 +1,20 @@
 package com.prokopchuk.mymdb.config;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.Set;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.prokopchuk.mymdb.adapter.out.persistence.entity.UserEntity;
-import com.prokopchuk.mymdb.adapter.out.persistence.repo.RoleRepo;
-import com.prokopchuk.mymdb.application.service.UserService;
+import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
+import com.prokopchuk.mymdb.domain.Role;
 import com.prokopchuk.mymdb.domain.Sex;
+import com.prokopchuk.mymdb.domain.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,78 +24,85 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Bootstrap {
 
-    private final UserService userService;
+    private final RegisterUserPort registerUserPort;
+    private final UserDetailsService userService;
 
-    private final RoleRepo roleRepo;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @EventListener(ApplicationReadyEvent.class)
     public void addStartUsersIfTheyNotExist() {
-        var superAdminRole = roleRepo.findByName("ROLE_SUPER_ADMIN").orElseThrow();
-        var adminRole = roleRepo.findByName("ROLE_ADMIN").orElseThrow();
-        var userRole = roleRepo.findByName("ROLE_USER").orElseThrow();
         try {
             userService.loadUserByUsername("superAdmin");
         } catch (UsernameNotFoundException ex) {
             log.info("supper admin user was not found and will be created with username: supperAdmin");
-            var superAdmin = UserEntity.builder()
+            var superAdmin = User.builder()
               .username("superAdmin")
               .email("supreme@mail.com")
-              .password("supperAdminStrongPassword")
+              .password(passwordEncoder.encode("supperAdminStrongPassword"))
               .sex(Sex.MALE)
               .firstName("Super")
               .lastName("Admin")
-              .roles(Set.of(superAdminRole, adminRole, userRole))
               .birthday(LocalDate.of(1988, Month.APRIL, 10))
               .enabled(true)
               .accountNonLocked(true)
               .accountNonExpired(true)
               .credentialsNonExpired(true)
+              .createdAt(LocalDateTime.now())
               .build();
 
-            userService.saveUser(superAdmin);
+            superAdmin.addRole(Role.ROLE_USER);
+            superAdmin.addRole(Role.ROLE_ADMIN);
+            superAdmin.addRole(Role.ROLE_SUPER_ADMIN);
+
+            registerUserPort.registerUser(superAdmin);
         }
 
         try {
             userService.loadUserByUsername("admin");
         } catch (UsernameNotFoundException ex) {
             log.info("admin user was not found and will be created with username: admin");
-            var admin = UserEntity.builder()
+            var admin = User.builder()
               .username("admin")
               .email("admin@mail.com")
-              .password("adminStrongPassword")
+              .password(passwordEncoder.encode("adminStrongPassword"))
               .sex(Sex.MALE)
               .firstName("Ordinary")
               .lastName("Admin")
-              .roles(Set.of(adminRole, userRole))
               .birthday(LocalDate.of(1994, Month.SEPTEMBER, 4))
               .enabled(true)
               .accountNonLocked(true)
               .accountNonExpired(true)
               .credentialsNonExpired(true)
+              .createdAt(LocalDateTime.now())
               .build();
 
-            userService.saveUser(admin);
+            admin.addRole(Role.ROLE_USER);
+            admin.addRole(Role.ROLE_ADMIN);
+
+            registerUserPort.registerUser(admin);
         }
 
         try {
             userService.loadUserByUsername("testUser");
         } catch (UsernameNotFoundException ex) {
             log.info("user was not found and will be created with username: testUser");
-            var user = UserEntity.builder()
+            var user = User.builder()
               .username("testUser")
               .email("testUser@mail.com")
-              .password("testUserStrongPassword")
+              .password(passwordEncoder.encode("testUserStrongPassword"))
               .sex(Sex.FEMALE)
               .firstName("test")
               .lastName("user")
-              .roles(Set.of(userRole))
               .birthday(LocalDate.of(2000, Month.DECEMBER, 1))
               .enabled(true)
               .accountNonLocked(true)
               .accountNonExpired(true)
               .credentialsNonExpired(true)
+              .createdAt(LocalDateTime.now())
               .build();
-            userService.saveUser(user);
+
+            user.addRole(Role.ROLE_USER);
+            registerUserPort.registerUser(user);
         }
     }
 }

@@ -11,8 +11,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +19,7 @@ import lombok.Setter;
 @Table(name = "roles")
 @Getter
 @Setter
-public class RoleEntity implements GrantedAuthority {
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roles_seq")
@@ -34,9 +32,4 @@ public class RoleEntity implements GrantedAuthority {
     @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<UserEntity> users;
-
-    @Override
-    public String getAuthority() {
-        return name;
-    }
 }

@@ -41,7 +41,8 @@ public class FilmEntity {
     @Column(nullable = false)
     private LocalDate productionDate;
 
-    private LocalDateTime createdAt;
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt;
 

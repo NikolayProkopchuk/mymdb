@@ -9,4 +9,6 @@ import com.prokopchuk.mymdb.adapter.out.persistence.entity.UserEntity;
 
 public interface UserRepo extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findUserEntityByUsername(String username);
+
+    Optional<UserEntity> findUserEntityByEmail(String email);
 }

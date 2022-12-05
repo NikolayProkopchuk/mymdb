@@ -13,7 +13,7 @@ import com.prokopchuk.mymdb.application.port.in.FilmDtoQuery;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/film")
+@RequestMapping("/films")
 @RequiredArgsConstructor
 public class FilmController {
 
