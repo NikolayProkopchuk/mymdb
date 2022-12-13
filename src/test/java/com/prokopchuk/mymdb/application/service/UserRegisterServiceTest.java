@@ -10,7 +10,7 @@ import java.time.Month;
 import java.util.Optional;
 
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.CreateUserCommand;
+import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.domain.Role;
@@ -72,8 +72,8 @@ class UserRegisterServiceTest {
         then(passwordEncoder).should().encode(eq("test"));
     }
 
-    private CreateUserCommand createUserCommand() {
-        return new CreateUserCommand(
+    private RegisterUserCommand createUserCommand() {
+        return new RegisterUserCommand(
           "test",
           "test@mail.com",
           "test",

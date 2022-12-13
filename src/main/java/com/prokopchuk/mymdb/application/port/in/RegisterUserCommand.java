@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import com.prokopchuk.mymdb.domain.Sex;
 
-public record CreateUserCommand(
+public record RegisterUserCommand(
   String username, String email, String password, Sex sex, String firstName, String lastName, LocalDate birthday
 ) {
 }

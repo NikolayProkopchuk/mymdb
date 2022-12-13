@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prokopchuk.mymdb.adapter.in.web.dto.req.CreateUserRequestDto;
+import com.prokopchuk.mymdb.adapter.in.web.dto.req.RegisterUserRequestDto;
 import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
 import com.prokopchuk.mymdb.application.UserException;
 import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
@@ -18,21 +18,21 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-public class UserRegisterController {
+class UserRegisterController {
 
     private final UserRegisterUseCase registerUserUseCase;
     private final UserRequestToCommandMapper userRequestToCommandMapper;
 
     @PostMapping
-    public ResponseEntity<Long> createUser(@RequestBody CreateUserRequestDto dto) {
-
-        var createUserCommand = userRequestToCommandMapper.createUserRequestToCommand(dto);
+    ResponseEntity<Long> registerUser(@RequestBody RegisterUserRequestDto dto) {
+        //todo: add input validation
+        var registerUserCommand = userRequestToCommandMapper.registerUserRequestToCommand(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
-          .body(registerUserUseCase.registerUser(createUserCommand));
+          .body(registerUserUseCase.registerUser(registerUserCommand));
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> handleUserException(UserException ex) {
+    ResponseEntity<String> handleUserException(UserException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 

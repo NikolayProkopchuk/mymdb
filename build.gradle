@@ -18,8 +18,8 @@ configurations {
 }
 
 ext {
-    postgresqlVersion = '42.5.0'
-    flywayVersion = '9.7.0'
+    postgresqlVersion = '42.5.1'
+    flywayVersion = '9.8.3'
     springSecurityVersion = '2.7.5'
     mapstructVersion = '1.5.3.Final'
     jsonwebtokenVersion = '0.11.5'
@@ -36,12 +36,17 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security:${springSecurityVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     implementation "io.jsonwebtoken:jjwt-api:${jsonwebtokenVersion}"
-    compileOnly "org.flywaydb:flyway-core:${flywayVersion}"
+    implementation "org.flywaydb:flyway-core:${flywayVersion}"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+    testImplementation "org.testcontainers:testcontainers:1.17.6"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+
+    testImplementation('org.testcontainers:postgresql:1.17.6')
 }
 
 tasks.named('test') {

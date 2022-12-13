@@ -1,18 +1,19 @@
 package com.prokopchuk.mymdb.adapter.in.web;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
-import java.time.Month;
 
 import com.prokopchuk.mymdb.MymdbApplication;
-import com.prokopchuk.mymdb.adapter.in.web.dto.req.CreateUserRequestDto;
+import com.prokopchuk.mymdb.adapter.in.web.dto.req.RegisterUserRequestDto;
 import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.CreateUserCommand;
+import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
 import com.prokopchuk.mymdb.config.WebSecurityConfig;
 import com.prokopchuk.mymdb.domain.Sex;
@@ -41,10 +42,10 @@ class UserRegisterControllerTest {
 
     @Test
     void registerUserTest() throws Exception {
-        var createUserDto = new CreateUserRequestDto("test", "test@mail.com", "testpass",
-          Sex.MALE, "test", "test", LocalDate.of(1988, Month.APRIL, 10));
+        var createUserDto = new RegisterUserRequestDto("test", "test@mail.com", "testpass",
+          Sex.MALE, "testFirstName", "testLastName", LocalDate.of(2000, 1, 1));
         var createUserCommand = createUserCommand();
-        when(userRequestToCommandMapper.createUserRequestToCommand(createUserDto)).thenReturn(createUserCommand);
+        when(userRequestToCommandMapper.registerUserRequestToCommand(createUserDto)).thenReturn(createUserCommand);
         when(userRegisterUseCase.registerUser(createUserCommand)).thenReturn(1L);
         mockMvc.perform(post("/users")
             .content("""
@@ -53,14 +54,16 @@ class UserRegisterControllerTest {
                 "email": "test@mail.com",
                 "password": "testpass",
                 "sex": "MALE",
-                "firstName": "test",
-                "lastName": "test",
-                "birthday": "1988-04-10"
+                "firstName": "testFirstName",
+                "lastName": "testLastName",
+                "birthday": "2000-01-01"
                 }
               """)
             .header("Content-type", "application/json"))
           .andExpect(status().isCreated())
           .andExpect(MockMvcResultMatchers.content().json("1"));
+
+        then(userRegisterUseCase).should().registerUser(eq(createUserCommand));
     }
 
     @Test
@@ -73,23 +76,23 @@ class UserRegisterControllerTest {
                 "email": "test@mail.com",
                 "password": "testpass",
                 "sex": "MALE",
-                "firstName": "test",
-                "lastName": "test",
-                "birthday": "1988-04-10"
+                "firstName": "testFirstName",
+                "lastName": "testLastName",
+                "birthday": "2000-01-01"
                 }
               """)
             .header("Content-type", "application/json"))
           .andExpect(status().isConflict());
     }
 
-    private CreateUserCommand createUserCommand() {
-        return new CreateUserCommand(
+    private RegisterUserCommand createUserCommand() {
+        return new RegisterUserCommand(
           "test",
           "test@mail.com",
-          "test",
+          "testpass",
           Sex.MALE,
-          "test",
-          "test",
-          LocalDate.of(1988, Month.APRIL, 10));
+          "testFirstName",
+          "testLastName",
+          LocalDate.of(2000, 1, 1));
     }
 }

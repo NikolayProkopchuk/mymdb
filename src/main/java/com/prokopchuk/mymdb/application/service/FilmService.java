@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class FilmService implements FilmDtoQuery {
+class FilmService implements FilmDtoQuery {
 
     private final FilmRepo filmRepo;
 

@@ -15,17 +15,17 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/films")
 @RequiredArgsConstructor
-public class FilmController {
+class FilmController {
 
     private final FilmDtoQuery filmDtoQuery;
 
     @GetMapping
-    public Page<FilmEntityDto> getFilms(Pageable pageable) {
+    Page<FilmEntityDto> getFilms(Pageable pageable) {
         return filmDtoQuery.getFilms(pageable);
     }
 
     @GetMapping("/{id}")
-    public FilmEntityDto getFilm(@PathVariable Long id) {
+    FilmEntityDto getFilm(@PathVariable Long id) {
         return filmDtoQuery.getFilm(id);
     }
 

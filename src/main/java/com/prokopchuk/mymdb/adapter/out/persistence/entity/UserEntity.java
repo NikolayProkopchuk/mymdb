@@ -26,10 +26,7 @@ import org.hibernate.annotations.NaturalId;
 import com.prokopchuk.mymdb.domain.Sex;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -46,7 +43,7 @@ public class UserEntity {
     @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(nullable = false, unique = true)
     @NaturalId
     private String username;
 
