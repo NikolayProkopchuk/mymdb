@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class UserPersistenceAdapter implements LoadUserPort, RegisterUserPort {
+class UserPersistenceAdapter implements LoadUserPort, RegisterUserPort {
 
     private final UserRepo userRepo;
 
@@ -40,7 +40,7 @@ public class UserPersistenceAdapter implements LoadUserPort, RegisterUserPort {
     public User registerUser(User user) {
         var userEntity = userUserEntityMapper.userToUserEntity(user);
         for (var role : user.getRoles()) {
-            var roleEntity = roleRepo.findByName(role.name()).orElseThrow();
+            var roleEntity = roleRepo.findByName(role).orElseThrow();
             userEntity.addRole(roleEntity);
         }
         userRepo.save(userEntity);

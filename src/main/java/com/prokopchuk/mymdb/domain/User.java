@@ -53,7 +53,8 @@ public class User implements UserDetails {
 
     private boolean enabled;
 
-    private final Set<Role> roles = new HashSet<>();
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>();
 
     public void addRole(Role role) {
         roles.add(role);

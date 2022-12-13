@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import com.prokopchuk.mymdb.adapter.out.persistence.entity.UserEntity;
 import com.prokopchuk.mymdb.domain.User;
 
-@Mapper()
+@Mapper(uses = RoleEntityRoleMapper.class)
 public interface UserUserEntityMapper {
 
     User userEntityToUser(UserEntity userEntity);

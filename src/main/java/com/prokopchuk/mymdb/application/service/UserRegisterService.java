@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.CreateUserCommand;
+import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
 import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class UserRegisterService implements UserRegisterUseCase {
+class UserRegisterService implements UserRegisterUseCase {
 
     private final LoadUserPort loadUserPort;
     private final RegisterUserPort registerUserPort;
@@ -26,7 +26,7 @@ public class UserRegisterService implements UserRegisterUseCase {
 
     @Override
     @Transactional
-    public Long registerUser(CreateUserCommand userCommand) {
+    public Long registerUser(RegisterUserCommand userCommand) {
         if (loadUserPort.loadUserByUsername(userCommand.username()).isPresent()) {
             throw new UserException(String.format("User with username: '%s' exists", userCommand.username()));
         }

@@ -3,6 +3,8 @@ package com.prokopchuk.mymdb.adapter.out.persistence.entity;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.prokopchuk.mymdb.domain.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +30,8 @@ public class RoleEntity {
     private Integer id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private Role name;
 
     @Transient
     @ManyToMany(mappedBy = "roles")
