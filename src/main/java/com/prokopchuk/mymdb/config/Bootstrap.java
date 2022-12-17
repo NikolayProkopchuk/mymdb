@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,6 +40,7 @@ public class Bootstrap {
               .username("superAdmin")
               .email("supreme@mail.com")
               .password(passwordEncoder.encode("supperAdminStrongPassword"))
+              .publicId(RandomStringUtils.randomAlphabetic(10))
               .sex(Sex.MALE)
               .firstName("Super")
               .lastName("Admin")
@@ -64,6 +66,7 @@ public class Bootstrap {
             var admin = User.builder()
               .username("admin")
               .email("admin@mail.com")
+              .publicId(RandomStringUtils.randomAlphabetic(10))
               .password(passwordEncoder.encode("adminStrongPassword"))
               .sex(Sex.MALE)
               .firstName("Ordinary")
@@ -89,6 +92,7 @@ public class Bootstrap {
             var user = User.builder()
               .username("testUser")
               .email("testUser@mail.com")
+              .publicId(RandomStringUtils.randomAlphabetic(10))
               .password(passwordEncoder.encode("testUserStrongPassword"))
               .sex(Sex.FEMALE)
               .firstName("test")

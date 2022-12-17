@@ -1,4 +1,4 @@
-package com.prokopchuk.mymdb.application.port.in;
+package com.prokopchuk.mymdb.application.port.in.command;
 
 import java.time.LocalDate;
 

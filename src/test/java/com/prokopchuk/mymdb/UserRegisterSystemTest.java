@@ -45,7 +45,7 @@ class UserRegisterSystemTest {
         assertThat(user.getUsername()).isEqualTo("test");
     }
 
-    private ResponseEntity<Long> whenRegisterUser() {
+    private ResponseEntity<String> whenRegisterUser() {
         String requestBody = """
           {
           "username": "test",
@@ -60,6 +60,6 @@ class UserRegisterSystemTest {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         var request = new HttpEntity<>(requestBody, headers);
-        return restTemplate.postForEntity("/users", request, Long.class);
+        return restTemplate.postForEntity("/users", request, String.class);
     }
 }

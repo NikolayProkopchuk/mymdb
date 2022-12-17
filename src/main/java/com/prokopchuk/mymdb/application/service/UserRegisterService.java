@@ -1,12 +1,13 @@
 package com.prokopchuk.mymdb.application.service;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.domain.Role;
@@ -26,7 +27,7 @@ class UserRegisterService implements UserRegisterUseCase {
 
     @Override
     @Transactional
-    public Long registerUser(RegisterUserCommand userCommand) {
+    public String registerUser(RegisterUserCommand userCommand) {
         if (loadUserPort.loadUserByUsername(userCommand.username()).isPresent()) {
             throw new UserException(String.format("User with username: '%s' exists", userCommand.username()));
         }
@@ -41,8 +42,9 @@ class UserRegisterService implements UserRegisterUseCase {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
+        user.setPublicId(RandomStringUtils.randomAlphabetic(10));
         var createdUser = registerUserPort.registerUser(user);
 
-        return createdUser.getId();
+        return createdUser.getPublicId();
     }
 }
