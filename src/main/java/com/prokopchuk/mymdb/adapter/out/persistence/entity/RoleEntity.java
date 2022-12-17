@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.prokopchuk.mymdb.domain.Role;
+
 import lombok.Getter;
 import lombok.Setter;
 

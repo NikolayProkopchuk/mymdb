@@ -24,7 +24,7 @@ class UserRegisterController {
     private final UserRequestToCommandMapper userRequestToCommandMapper;
 
     @PostMapping
-    ResponseEntity<Long> registerUser(@RequestBody RegisterUserRequestDto dto) {
+    ResponseEntity<String> registerUser(@RequestBody RegisterUserRequestDto dto) {
         //todo: add input validation
         var registerUserCommand = userRequestToCommandMapper.registerUserRequestToCommand(dto);
         return ResponseEntity.status(HttpStatus.CREATED)

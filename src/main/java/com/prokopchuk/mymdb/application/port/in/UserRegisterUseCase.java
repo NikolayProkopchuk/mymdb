@@ -1,5 +1,7 @@
 package com.prokopchuk.mymdb.application.port.in;
 
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
+
 public interface UserRegisterUseCase {
-    Long registerUser(RegisterUserCommand userCommand);
+    String registerUser(RegisterUserCommand userCommand);
 }

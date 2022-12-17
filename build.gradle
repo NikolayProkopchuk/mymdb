@@ -8,8 +8,6 @@ plugins {
 
 group = 'com.prokopchuk'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -23,6 +21,8 @@ ext {
     springSecurityVersion = '2.7.5'
     mapstructVersion = '1.5.3.Final'
     jsonwebtokenVersion = '0.11.5'
+    apacheCommonsVersion = '3.12.0'
+    testContainersVersion = '1.17.6'
 }
 
 repositories {
@@ -36,17 +36,18 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security:${springSecurityVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     implementation "io.jsonwebtoken:jjwt-api:${jsonwebtokenVersion}"
+    implementation "io.jsonwebtoken:jjwt-impl:${jsonwebtokenVersion}"
+    implementation "io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}"
     implementation "org.flywaydb:flyway-core:${flywayVersion}"
+    implementation "org.apache.commons:commons-lang3:${apacheCommonsVersion}"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
-    testImplementation "org.testcontainers:testcontainers:1.17.6"
-    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
-
-    testImplementation('org.testcontainers:postgresql:1.17.6')
+    testImplementation "org.testcontainers:testcontainers:${testContainersVersion}"
+    testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
 }
 
 tasks.named('test') {

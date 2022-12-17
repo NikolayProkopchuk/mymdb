@@ -13,7 +13,7 @@ import com.prokopchuk.mymdb.MymdbApplication;
 import com.prokopchuk.mymdb.adapter.in.web.dto.req.RegisterUserRequestDto;
 import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
 import com.prokopchuk.mymdb.config.WebSecurityConfig;
 import com.prokopchuk.mymdb.domain.Sex;
@@ -45,8 +45,9 @@ class UserRegisterControllerTest {
         var createUserDto = new RegisterUserRequestDto("test", "test@mail.com", "testpass",
           Sex.MALE, "testFirstName", "testLastName", LocalDate.of(2000, 1, 1));
         var createUserCommand = createUserCommand();
+        String publicId = "\"abcdefghij\"";
         when(userRequestToCommandMapper.registerUserRequestToCommand(createUserDto)).thenReturn(createUserCommand);
-        when(userRegisterUseCase.registerUser(createUserCommand)).thenReturn(1L);
+        when(userRegisterUseCase.registerUser(createUserCommand)).thenReturn(publicId);
         mockMvc.perform(post("/users")
             .content("""
                 {
@@ -61,7 +62,7 @@ class UserRegisterControllerTest {
               """)
             .header("Content-type", "application/json"))
           .andExpect(status().isCreated())
-          .andExpect(MockMvcResultMatchers.content().json("1"));
+          .andExpect(MockMvcResultMatchers.content().json(publicId));
 
         then(userRegisterUseCase).should().registerUser(eq(createUserCommand));
     }

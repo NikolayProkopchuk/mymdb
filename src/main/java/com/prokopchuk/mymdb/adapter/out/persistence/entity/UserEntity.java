@@ -54,6 +54,9 @@ public class UserEntity {
     private String password;
 
     @Column(nullable = false)
+    private String publicId;
+
+    @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)

@@ -3,7 +3,7 @@ package com.prokopchuk.mymdb.application.service;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.domain.User;
 
 @Mapper

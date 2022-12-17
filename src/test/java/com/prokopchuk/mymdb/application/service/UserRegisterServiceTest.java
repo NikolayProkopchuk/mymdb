@@ -10,7 +10,7 @@ import java.time.Month;
 import java.util.Optional;
 
 import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.RegisterUserCommand;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.domain.Role;
@@ -67,7 +67,7 @@ class UserRegisterServiceTest {
         given(loadUserPort.loadUserByUsername("test")).willReturn(Optional.empty());
         given(registerUserPort.registerUser(userToSave)).willReturn(savedUser);
 
-        assertThat(registerUserService.registerUser(createUserCommand)).isEqualTo(1L);
+        assertThat(registerUserService.registerUser(createUserCommand)).isEqualTo("abcdefghij");
         //todo: add check that user has role ROLE_USER
         then(passwordEncoder).should().encode(eq("test"));
     }
@@ -100,6 +100,7 @@ class UserRegisterServiceTest {
           .id(1L)
           .username("test")
           .email("test@mail.com")
+          .publicId("abcdefghij")
           .password("test")
           .firstName("test")
           .lastName("test")

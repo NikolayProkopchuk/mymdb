@@ -30,6 +30,8 @@ public class User implements UserDetails {
 
     private String email;
 
+    private String publicId;
+
     private String password;
 
     private Sex sex;

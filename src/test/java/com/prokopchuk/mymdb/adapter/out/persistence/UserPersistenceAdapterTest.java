@@ -57,6 +57,7 @@ class UserPersistenceAdapterTest {
         var user = User.builder()
           .username("test")
           .email("test@mail.com")
+          .publicId("abcdefghij")
           .password("testPass")
           .sex(Sex.MALE)
           .firstName("testFirstName")
@@ -74,6 +75,7 @@ class UserPersistenceAdapterTest {
         var savedUserEntity = userRepo.findUserEntityByUsername("test").orElseThrow();
         assertThat(savedUserEntity.getUsername()).isEqualTo(user.getUsername());
         assertThat(savedUserEntity.getEmail()).isEqualTo(user.getEmail());
+        assertThat(savedUserEntity.getPublicId()).isEqualTo("abcdefghij");
         assertThat(savedUserEntity.getSex()).isEqualTo(user.getSex());
         assertThat(savedUserEntity.getFirstName()).isEqualTo(user.getFirstName());
         assertThat(savedUserEntity.getLastName()).isEqualTo(user.getLastName());
