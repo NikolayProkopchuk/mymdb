@@ -10,6 +10,7 @@ import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
 import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
+import com.prokopchuk.mymdb.application.service.mapper.UserCommandUserMapper;
 import com.prokopchuk.mymdb.domain.Role;
 
 import lombok.RequiredArgsConstructor;

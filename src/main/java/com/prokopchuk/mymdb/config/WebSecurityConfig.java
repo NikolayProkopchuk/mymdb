@@ -1,6 +1,7 @@
 package com.prokopchuk.mymdb.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import lombok.RequiredArgsConstructor;
 
 
+@Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
@@ -35,10 +37,10 @@ public class WebSecurityConfig {
           .authenticationManager(authenticationManager)
           .csrf()
           .disable()
-          .authorizeRequests()
-          .antMatchers(HttpMethod.GET, "/films")
+          .authorizeHttpRequests()
+          .requestMatchers(HttpMethod.GET, "/films")
           .permitAll()
-          .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
+          .requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
           .permitAll()
           .anyRequest()
           .authenticated()

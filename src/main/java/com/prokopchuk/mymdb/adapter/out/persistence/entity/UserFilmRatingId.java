@@ -1,8 +1,8 @@
 package com.prokopchuk.mymdb.adapter.out.persistence.entity;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 
+import jakarta.persistence.Embeddable;
 import lombok.Data;
 
 @Embeddable

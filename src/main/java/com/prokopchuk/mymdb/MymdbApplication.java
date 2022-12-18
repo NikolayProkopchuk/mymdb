@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
 import com.prokopchuk.mymdb.adapter.out.persistence.mapper.UserUserEntityMapper;
-import com.prokopchuk.mymdb.application.service.UserCommandUserMapper;
+import com.prokopchuk.mymdb.application.service.mapper.UserCommandUserMapper;
 
 @SpringBootApplication
 public class MymdbApplication {

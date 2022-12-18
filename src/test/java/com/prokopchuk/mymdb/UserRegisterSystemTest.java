@@ -2,9 +2,6 @@ package com.prokopchuk.mymdb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
-import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
-import com.prokopchuk.mymdb.domain.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
+import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
+import com.prokopchuk.mymdb.domain.User;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
