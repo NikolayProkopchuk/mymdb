@@ -9,18 +9,20 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Optional;
 
-import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
-import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
-import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
-import com.prokopchuk.mymdb.domain.Role;
-import com.prokopchuk.mymdb.domain.Sex;
-import com.prokopchuk.mymdb.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.prokopchuk.mymdb.application.UserException;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
+import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
+import com.prokopchuk.mymdb.application.port.out.RegisterUserPort;
+import com.prokopchuk.mymdb.application.service.mapper.UserCommandUserMapper;
+import com.prokopchuk.mymdb.domain.Role;
+import com.prokopchuk.mymdb.domain.Sex;
+import com.prokopchuk.mymdb.domain.User;
 
 class UserRegisterServiceTest {
 

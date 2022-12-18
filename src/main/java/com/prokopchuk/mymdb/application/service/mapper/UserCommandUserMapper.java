@@ -1,4 +1,4 @@
-package com.prokopchuk.mymdb.application.service;
+package com.prokopchuk.mymdb.application.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

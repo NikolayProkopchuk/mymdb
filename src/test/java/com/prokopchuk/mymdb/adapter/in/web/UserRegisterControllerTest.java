@@ -9,14 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 
-import com.prokopchuk.mymdb.MymdbApplication;
-import com.prokopchuk.mymdb.adapter.in.web.dto.req.RegisterUserRequestDto;
-import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
-import com.prokopchuk.mymdb.application.UserException;
-import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
-import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
-import com.prokopchuk.mymdb.config.WebSecurityConfig;
-import com.prokopchuk.mymdb.domain.Sex;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,6 +17,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.prokopchuk.mymdb.MymdbApplication;
+import com.prokopchuk.mymdb.adapter.in.web.dto.req.RegisterUserRequestDto;
+import com.prokopchuk.mymdb.adapter.in.web.mapper.UserRequestToCommandMapper;
+import com.prokopchuk.mymdb.application.UserException;
+import com.prokopchuk.mymdb.application.port.in.UserRegisterUseCase;
+import com.prokopchuk.mymdb.application.port.in.command.RegisterUserCommand;
+import com.prokopchuk.mymdb.config.WebSecurityConfig;
+import com.prokopchuk.mymdb.domain.Sex;
 
 @WebMvcTest(UserRegisterController.class)
 @AutoConfigureMockMvc

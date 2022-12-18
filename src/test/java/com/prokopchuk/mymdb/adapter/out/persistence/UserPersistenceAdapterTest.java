@@ -2,16 +2,10 @@ package com.prokopchuk.mymdb.adapter.out.persistence;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.prokopchuk.mymdb.adapter.out.persistence.entity.RoleEntity;
-import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
-import com.prokopchuk.mymdb.domain.Role;
-import com.prokopchuk.mymdb.domain.Sex;
-import com.prokopchuk.mymdb.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,6 +14,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import com.prokopchuk.mymdb.adapter.out.persistence.entity.RoleEntity;
+import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
+import com.prokopchuk.mymdb.domain.Role;
+import com.prokopchuk.mymdb.domain.Sex;
+import com.prokopchuk.mymdb.domain.User;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -81,6 +81,7 @@ class UserPersistenceAdapterTest {
         assertThat(savedUserEntity.getLastName()).isEqualTo(user.getLastName());
         assertThat(savedUserEntity.getBirthday()).isEqualTo(user.getBirthday());
         assertThat(savedUserEntity.getRoles()).hasSize(user.getRoles().size());
-        assertThat(savedUserEntity.getRoles().stream().map(RoleEntity::getName).collect(Collectors.toSet())).isEqualTo(user.getRoles());
+        assertThat(savedUserEntity.getRoles().stream().map(RoleEntity::getName).collect(Collectors.toSet()))
+          .isEqualTo(user.getRoles());
     }
 }
