@@ -22,8 +22,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
@@ -47,6 +49,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse resp, FilterChain chain,
                                             Authentication authResult) {
         var user = (User) authResult.getPrincipal();
+        log.info("user: {} successfully authenticated", user.getUsername());
         Key key = Keys.hmacShaKeyFor(SecurityConstants.TOKEN_SECRET.getEncoded());
         String token = Jwts.builder()
           .setSubject(user.getUsername())
