@@ -3,9 +3,19 @@ package com.prokopchuk.mymdb.domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Film {
     private Long id;
 
@@ -17,7 +27,8 @@ public class Film {
 
     private MymdbRating mymdbRating;
 
-    private LocalDateTime createdAt;
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt;
 }

@@ -23,6 +23,8 @@ ext {
     jsonwebtokenVersion = '0.11.5'
     apacheCommonsVersion = '3.12.0'
     testContainersVersion = '1.17.6'
+    jacartaValidationVersion = '3.0.2'
+    hibernateValidatorVersion = '8.0.0.Final'
 }
 
 repositories {
@@ -40,11 +42,14 @@ dependencies {
     implementation "io.jsonwebtoken:jjwt-jackson:${jsonwebtokenVersion}"
     implementation "org.flywaydb:flyway-core:${flywayVersion}"
     implementation "org.apache.commons:commons-lang3:${apacheCommonsVersion}"
+    implementation "jakarta.validation:jakarta.validation-api:${jacartaValidationVersion}"
+    implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation "org.testcontainers:testcontainers:${testContainersVersion}"
     testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
     testImplementation "org.testcontainers:postgresql:${testContainersVersion}"

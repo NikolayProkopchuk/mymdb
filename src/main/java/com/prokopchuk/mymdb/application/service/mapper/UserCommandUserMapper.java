@@ -10,6 +10,7 @@ import com.prokopchuk.mymdb.domain.User;
 public interface UserCommandUserMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "publicId", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "accountNonExpired", ignore = true)

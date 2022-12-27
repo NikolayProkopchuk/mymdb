@@ -2,6 +2,7 @@ package com.prokopchuk.mymdb.adapter.out.persistence.repo;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import com.prokopchuk.mymdb.adapter.out.persistence.entity.FilmEntity;
 import com.prokopchuk.mymdb.adapter.out.persistence.entity.FilmEntityDto;
 
 
-public interface FilmRepo extends PagingAndSortingRepository<FilmEntity, Long> {
+public interface FilmRepo extends PagingAndSortingRepository<FilmEntity, Long>, JpaRepository<FilmEntity, Long> {
 
     @Query("""
           select new com.prokopchuk.mymdb.adapter.out.persistence.entity.FilmEntityDto(
