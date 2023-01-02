@@ -42,6 +42,8 @@ public class WebSecurityConfig {
           .permitAll()
           .requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
           .permitAll()
+          .requestMatchers(HttpMethod.GET, "/actuator/health")
+          .permitAll()
           .anyRequest()
           .authenticated()
           .and().addFilter(authenticationFilter(authenticationManager))

@@ -29,5 +29,11 @@ services:
       - postgres
     environment:
       SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgres:5432/mymdb'
+    restart: unless-stopped
     ports:
       - "8080:8080"
+    healthcheck:
+        test: [ "CMD", "curl", "if", "http://localhost:8080/actuator/health" ]
+        interval: 30s
+        timeout: 10s
+        retries: 3
