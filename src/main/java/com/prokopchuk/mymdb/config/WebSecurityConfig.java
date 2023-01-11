@@ -47,7 +47,7 @@ public class WebSecurityConfig {
           .anyRequest()
           .authenticated()
           .and().addFilter(authenticationFilter(authenticationManager))
-          .addFilter(new AuthorizationFilter(authenticationManager))
+          .addFilter(new AuthorizationFilter(authenticationManager, userDetailsService))
           .sessionManagement()
           .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
           .and().build();

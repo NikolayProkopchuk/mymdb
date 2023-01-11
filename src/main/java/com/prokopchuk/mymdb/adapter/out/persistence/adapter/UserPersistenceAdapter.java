@@ -1,4 +1,4 @@
-package com.prokopchuk.mymdb.adapter.out.persistence;
+package com.prokopchuk.mymdb.adapter.out.persistence.adapter;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-class UserPersistenceAdapter implements LoadUserPort, RegisterUserPort {
+public class UserPersistenceAdapter implements LoadUserPort, RegisterUserPort {
 
     private final UserRepo userRepo;
 

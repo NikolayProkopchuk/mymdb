@@ -1,7 +1,8 @@
 package com.prokopchuk.mymdb.application.port.in;
 
+import com.prokopchuk.mymdb.application.port.in.command.RateFilmCommand;
 import com.prokopchuk.mymdb.domain.UserRating;
 
 public interface RateFilmUseCase {
-    UserRating rate(Long filmId, Long userId, int value);
+    UserRating rate(RateFilmCommand rateFilmCommand);
 }

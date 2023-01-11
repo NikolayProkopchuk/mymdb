@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import io.jsonwebtoken.Jwts;
@@ -16,8 +17,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager) {
+    private final UserDetailsService userDetailsService;
+
+    public AuthorizationFilter(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
         super(authenticationManager);
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -38,14 +42,15 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         token = token.replace(SecurityConstants.TOKEN_PREFIX, "");
 
-        String user = Jwts.parserBuilder()
+        String username = Jwts.parserBuilder()
           .setSigningKey(SecurityConstants.TOKEN_SECRET)
           .build()
           .parseClaimsJws(token)
           .getBody()
           .getSubject();
 
-        if (user != null) {
+        if (username != null) {
+            var user = userDetailsService.loadUserByUsername(username);
             return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
         }
         return null;

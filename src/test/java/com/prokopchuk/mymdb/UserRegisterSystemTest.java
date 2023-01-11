@@ -2,6 +2,8 @@ package com.prokopchuk.mymdb;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
-import com.prokopchuk.mymdb.application.port.out.LoadUserPort;
-import com.prokopchuk.mymdb.domain.User;
+import com.prokopchuk.mymdb.domain.Sex;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
@@ -27,23 +28,25 @@ class UserRegisterSystemTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private LoadUserPort loadUserPort;
-
-    @Autowired
     private UserRepo userRepo;
 
     @AfterEach
-    void init() {
-        userRepo.deleteAll();
+    void cleanup() {
+        userRepo.findUserEntityByUsername("test")
+          .ifPresent(e -> userRepo.delete(e));
     }
 
     @Test
     void registerUser() {
         var response = whenRegisterUser();
-        User user = loadUserPort.loadUserByUsername("test").orElseThrow();
+        var userEntity = userRepo.findUserEntityByUsername("test").orElseThrow();
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(user.getUsername()).isEqualTo("test");
+        assertThat(userEntity.getEmail()).isEqualTo("test@mail.com");
+        assertThat(userEntity.getFirstName()).isEqualTo("testFirstName");
+        assertThat(userEntity.getLastName()).isEqualTo("testLastName");
+        assertThat(userEntity.getSex()).isEqualTo(Sex.MALE);
+        assertThat(userEntity.getBirthday()).isEqualTo(LocalDate.of(2000, 1, 1));
     }
 
     private ResponseEntity<String> whenRegisterUser() {

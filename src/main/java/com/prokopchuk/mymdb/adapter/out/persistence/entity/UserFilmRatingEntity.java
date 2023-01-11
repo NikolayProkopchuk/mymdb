@@ -5,15 +5,16 @@ import java.util.Objects;
 
 import org.hibernate.Hibernate;
 
+import com.prokopchuk.mymdb.domain.Rating;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -22,29 +23,26 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 public class UserFilmRatingEntity  {
 
     @EmbeddedId
-    private UserFilmRatingId userFilmRatingId;
+    private UserFilmRatingId userFilmRatingId = new UserFilmRatingId();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false)
     @MapsId("userId")
     private UserEntity user;
 
-    @ManyToOne
-    @JoinColumn(name = "film_id")
+    @ManyToOne(optional = false)
     @MapsId("filmId")
     private FilmEntity film;
 
-    @Column(nullable = false)
-    private Integer rating;
+    @Convert(converter = RatingConverter.class)
+    private Rating rating;
 
     @Column(nullable = false, updatable = false)
-    LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object obj) {

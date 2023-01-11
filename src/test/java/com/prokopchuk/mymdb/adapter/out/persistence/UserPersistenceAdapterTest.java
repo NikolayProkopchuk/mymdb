@@ -15,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import com.prokopchuk.mymdb.adapter.out.persistence.adapter.UserPersistenceAdapter;
 import com.prokopchuk.mymdb.adapter.out.persistence.entity.RoleEntity;
 import com.prokopchuk.mymdb.adapter.out.persistence.repo.UserRepo;
 import com.prokopchuk.mymdb.domain.Role;

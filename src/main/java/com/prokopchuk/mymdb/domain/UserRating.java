@@ -1,4 +1,4 @@
 package com.prokopchuk.mymdb.domain;
 
-public record UserRating(User user, Film film, int rating) {
+public record UserRating(User user, Film film, Rating rating) {
 }
