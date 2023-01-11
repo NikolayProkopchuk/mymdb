@@ -10,8 +10,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import com.prokopchuk.mymdb.adapter.out.persistence.adapter.FilmPersistenceAdapter;
 import com.prokopchuk.mymdb.domain.Film;
 
 @DataJpaTest
@@ -37,5 +39,15 @@ class FilmPersistenceAdapterTest {
         assertThat(createdFilm.getName()).isEqualTo(film.getName());
         assertThat(createdFilm.getDescription()).isEqualTo(film.getDescription());
         assertThat(createdFilm.getProductionDate()).isEqualTo(film.getProductionDate());
+    }
+
+    @Test
+    @Sql("FilmPersistenceAdapterTest.sql")
+    void loadFilmById() {
+        Film film = filmPersistenceAdapter.loadFilmById(100L).orElseThrow();
+        assertThat(film.getName()).isEqualTo("test name");
+        assertThat(film.getDescription()).isEqualTo("test description");
+        assertThat(film.getProductionDate()).isEqualTo("2000-01-01");
+        assertThat(film.getCreatedAt()).isNotNull();
     }
 }
