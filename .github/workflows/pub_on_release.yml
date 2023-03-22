@@ -1,0 +1,13 @@
+name: Java CI with Gradle
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build_and_pub:
+    needs: [build-test]
+
+    steps:
+      - name: Build and push image
+        run: ./gradlew bootBuildImage

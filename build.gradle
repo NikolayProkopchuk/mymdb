@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'checkstyle'
     id 'jacoco'
+    id 'net.researchgate.release' version '3.0.2'
 }
 
 group = 'com.prokopchuk'
@@ -12,6 +13,13 @@ version = '0.0.1-SNAPSHOT'
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
+    }
+}
+
+release {
+    versionPropertyFile = 'gradle/wrapper/gradle-wrapper.properties'
+    git {
+        requireBranch.set('main')
     }
 }
 

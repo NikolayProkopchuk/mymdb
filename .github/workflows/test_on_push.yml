@@ -68,6 +68,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
-
-      - name: Build and push image
-        run: ./gradlew bootBuildImage
