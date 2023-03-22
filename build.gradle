@@ -17,7 +17,6 @@ configurations {
 }
 
 release {
-    versionPropertyFile = 'gradle/wrapper/gradle-wrapper.properties'
     git {
         requireBranch.set('master')
     }
