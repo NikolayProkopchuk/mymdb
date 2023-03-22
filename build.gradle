@@ -8,7 +8,6 @@ plugins {
 }
 
 group = 'com.prokopchuk'
-version = '0.0.1-SNAPSHOT'
 
 configurations {
     compileOnly {
@@ -17,6 +16,7 @@ configurations {
 }
 
 release {
+    tagTemplate = "v${version}"
     git {
         requireBranch.set('master')
     }
