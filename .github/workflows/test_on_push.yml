@@ -42,15 +42,6 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew            # make ./gradlew an executable command for Linux
 
-      - name: Restore gradle.properties
-        env:
-          GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
-        shell: bash
-        run: |
-          mkdir -p ~/.gradle/
-          echo "GRADLE_USER_HOME=${HOME}/.gradle" >> $GITHUB_ENV
-          echo "${GRADLE_PROPERTIES}" > ~/.gradle/gradle.properties
-
       - name: Execute checkstyle
         run: ./gradlew checkstyleMain     # run gradle checkstyle
 

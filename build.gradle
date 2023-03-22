@@ -67,7 +67,7 @@ tasks.named('test') {
 }
 
 tasks.named("bootBuildImage") {
-    imageName = "nikolay880410/${project.name}:${project.version}"
+    imageName = "nikolay880410/${GITHUB_REF:11}"
     publish = true
     docker {
         publishRegistry {

@@ -1,13 +1,57 @@
-name: Java CI with Gradle
-
 on:
   release:
     types: [published]
 
 jobs:
   build_and_pub:
-    needs: [build-test]
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: "mymdb"
+          POSTGRES_USER: "mymdbAdmin"
+          POSTGRES_PASSWORD: "pgpwd4mymdb"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3  # setup adopt-hotspot jdk 17
+        with:
+          java-version: '17'
+          distribution: 'adopt-hotspot'
+
+      - name: Setup gradle
+        uses: gradle/gradle-build-action@v2 # setup gradle and use a wrapper
+        with:
+          gradle-version: wrapper
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew            # make ./gradlew an executable command for Linux
+
+      - name: Restore gradle.properties
+        env:
+          GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
+        shell: bash
+        run: |
+          mkdir -p ~/.gradle/
+          echo "GRADLE_USER_HOME=${HOME}/.gradle" >> $GITHUB_ENV
+          echo "${GRADLE_PROPERTIES}" > ~/.gradle/gradle.properties
+
+      - name: Execute checkstyle
+        run: ./gradlew checkstyleMain     # run gradle checkstyle
+
+      - name: Run tests
+        run: ./gradlew clean build test    # run gradle tasks: clean, test and build
+
       - name: Build and push image
         run: ./gradlew bootBuildImage
