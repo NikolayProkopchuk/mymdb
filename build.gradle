@@ -16,7 +16,7 @@ configurations {
 }
 
 release {
-    tagTemplate = "v${version}"
+    tagTemplate = "refs/tags/v${version}"
     git {
         requireBranch.set('master')
     }
