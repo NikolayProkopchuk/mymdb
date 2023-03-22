@@ -16,7 +16,6 @@ configurations {
 }
 
 release {
-    tagTemplate = "refs/tags/v${version}"
     git {
         requireBranch.set('master')
     }
@@ -67,7 +66,7 @@ tasks.named('test') {
 }
 
 tasks.named("bootBuildImage") {
-    imageName = "nikolay880410/${GITHUB_REF:11}"
+    imageName = "nikolay880410/${project.name}:${version}"
     publish = true
     docker {
         publishRegistry {
