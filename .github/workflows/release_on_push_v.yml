@@ -25,7 +25,7 @@ jobs:
           prerelease: true
 
       - name: List files in directory
-        run: ls -R
+        run: ls
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1.0.1
