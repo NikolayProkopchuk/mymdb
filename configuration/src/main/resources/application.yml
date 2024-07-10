@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/mymdb
+    username: mymdbAdmin
+    password: pgpwd4mymdb
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false

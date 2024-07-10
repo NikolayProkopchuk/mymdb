@@ -1,0 +1,79 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+ext {
+    testContainersVersion = '1.19.8'
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring',
+    ]
+}
+
+dependencies {
+    implementation platform(rootProject)
+    implementation project(':common:domain')
+    implementation project(':common:adapter:persistence')
+    implementation project(':common:adapter:web')
+    implementation project(':user:adapter:web-user')
+    implementation project(':user:application-user')
+    implementation project(':user:domain-user')
+
+    implementation project(":media:adapter:web-media")
+    implementation project(":media:application-media")
+    implementation project(":media:domain-media")
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.mapstruct:mapstruct'
+    implementation 'org.projectlombok:lombok'
+
+    implementation 'org.postgresql:postgresql'
+    implementation 'io.jsonwebtoken:jjwt-api'
+    implementation 'io.jsonwebtoken:jjwt-impl'
+    implementation 'io.jsonwebtoken:jjwt-jackson'
+    testImplementation 'org.flywaydb:flyway-core'
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation "org.testcontainers:testcontainers:${testContainersVersion}"
+    testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
+            "org.projectlombok:lombok:${lombokVersion}",
+            "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.named("bootBuildImage") {
+    imageName = "nikolay880410/${project.name}:${version}"
+    tags = ["nikolay880410/${project.name}:latest"]
+    publish = true
+    docker {
+        publishRegistry {
+            username = project.property('dockerUser')
+            password = project.property('dockerPassword')
+            url = "https://hub.docker.com/"
+        }
+    }
+}
