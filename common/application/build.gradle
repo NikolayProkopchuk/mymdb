@@ -1,0 +1,5 @@
+dependencies {
+    implementation platform(rootProject)
+    implementation 'org.springframework:spring-context'
+    implementation 'jakarta.validation:jakarta.validation-api'
+}

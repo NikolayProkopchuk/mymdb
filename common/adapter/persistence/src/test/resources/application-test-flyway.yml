@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:12:///mymdb
+    username: postgres
+    password: postgres
+  flyway:
+    locations: filesystem:../../../configuration/src/main/resources/db/migration

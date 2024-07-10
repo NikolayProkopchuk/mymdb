@@ -1,0 +1,27 @@
+dependencies {
+    implementation platform(rootProject)
+    implementation project(':user:domain-user')
+    implementation project(':common:domain')
+    implementation project(':common:application')
+    implementation 'org.mapstruct:mapstruct'
+
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework.security:spring-security-crypto'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
+            "org.projectlombok:lombok:${lombokVersion}",
+            "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+}
+
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring',
+    ]
+}
+
+test {
+    useJUnitPlatform()
+}

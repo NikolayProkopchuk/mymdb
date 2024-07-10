@@ -1,1 +1,19 @@
 rootProject.name = 'mymdb'
+
+include 'common:application'
+include 'common:adapter:persistence'
+include 'common:adapter:web'
+include 'common:domain'
+include 'configuration'
+include 'media:adapter:web-media'
+project(':media:adapter:web-media').projectDir = file('media/adapter/web')
+include 'media:application-media'
+project(':media:application-media').projectDir = file('media/application')
+include 'media:domain-media'
+project(':media:domain-media').projectDir = file('media/domain')
+include 'user:adapter:web-user'
+project(':user:adapter:web-user').projectDir = file('user/adapter/web')
+include 'user:application-user'
+project(':user:application-user').projectDir = file('user/application')
+include 'user:domain-user'
+project(':user:domain-user').projectDir = file('user/domain')
