@@ -1,10 +1,11 @@
 package com.prokopchuk.mymdb.configuration.security.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
 import com.prokopchuk.mymdb.common.persistence.mapper.BaseIdToLongMapper;
 import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
 import com.prokopchuk.mymdb.user.domain.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(uses = {BaseIdToLongMapper.class, RoleToSecurityRoleMapper.class})
 public interface UserToSecurityUserDetailsMapper {

@@ -1,13 +1,13 @@
 package com.prokopchuk.mymdb.media.domain;
 
-import com.prokopchuk.mymdb.common.domain.entity.BaseEntity;
-import com.prokopchuk.mymdb.common.domain.value.FilmId;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.prokopchuk.mymdb.common.domain.entity.AggregateRoot;
+import com.prokopchuk.mymdb.common.domain.value.FilmId;
 
-public class Film extends BaseEntity<FilmId> {
+
+public class Film extends AggregateRoot<FilmId> {
     private String name;
     private String description;
     private LocalDate productionDate;

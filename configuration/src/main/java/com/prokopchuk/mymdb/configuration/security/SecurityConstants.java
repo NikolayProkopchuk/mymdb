@@ -1,10 +1,10 @@
 package com.prokopchuk.mymdb.configuration.security;
 
+import javax.crypto.SecretKey;
+
 import io.jsonwebtoken.Jwts;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-
-import javax.crypto.SecretKey;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityConstants {

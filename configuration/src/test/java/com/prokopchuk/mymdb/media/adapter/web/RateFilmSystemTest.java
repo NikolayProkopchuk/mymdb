@@ -2,10 +2,6 @@ package com.prokopchuk.mymdb.media.adapter.web;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-import com.prokopchuk.mymdb.common.persistence.entity.UserFilmRatingId;
-import com.prokopchuk.mymdb.common.persistence.repo.UserFilmRatingRepo;
-import com.prokopchuk.mymdb.configuration.MymdbApplication;
-import com.prokopchuk.mymdb.media.domain.Rating;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import com.prokopchuk.mymdb.common.persistence.entity.UserFilmRatingId;
+import com.prokopchuk.mymdb.common.persistence.repo.UserFilmRatingRepo;
+import com.prokopchuk.mymdb.configuration.MymdbApplication;
+import com.prokopchuk.mymdb.media.domain.Rating;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = MymdbApplication.class)
 @Testcontainers

@@ -6,13 +6,14 @@ import static org.mockito.BDDMockito.then;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import com.prokopchuk.mymdb.common.domain.value.FilmId;
 import com.prokopchuk.mymdb.media.application.port.in.command.CreateFilmCommand;
 import com.prokopchuk.mymdb.media.application.port.out.CreateFilmPort;
 import com.prokopchuk.mymdb.media.application.service.mapper.CreateFilmCommandToFilmMapper;
 import com.prokopchuk.mymdb.media.domain.Film;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class CreateFilmServiceTest {
 

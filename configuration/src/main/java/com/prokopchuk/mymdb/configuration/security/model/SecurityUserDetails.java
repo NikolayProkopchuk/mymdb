@@ -1,15 +1,16 @@
 package com.prokopchuk.mymdb.configuration.security.model;
 
-import lombok.Builder;
-import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder
@@ -41,6 +42,7 @@ public class SecurityUserDetails implements UserDetails {
 
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     private Set<SecurityRole> authorities = new HashSet<>();
 
     @Override

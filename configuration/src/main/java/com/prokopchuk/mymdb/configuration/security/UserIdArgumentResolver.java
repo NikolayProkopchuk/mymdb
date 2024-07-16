@@ -1,7 +1,7 @@
 package com.prokopchuk.mymdb.configuration.security;
 
-import com.prokopchuk.mymdb.common.adapter.web.annotation.AuthenticationUserId;
-import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
+import java.util.Objects;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -9,7 +9,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import java.util.Objects;
+import com.prokopchuk.mymdb.common.adapter.web.annotation.AuthenticationUserId;
+import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
 
 public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
     @Override

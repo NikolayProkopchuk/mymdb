@@ -1,12 +1,7 @@
 package com.prokopchuk.mymdb.common.persistance;
 
-import com.prokopchuk.mymdb.common.domain.value.FilmId;
-import com.prokopchuk.mymdb.common.domain.value.UserId;
-import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
-import com.prokopchuk.mymdb.common.persistence.UserFilmRatingPersistenceAdapter;
-import com.prokopchuk.mymdb.common.persistence.repo.UserFilmRatingRepo;
-import com.prokopchuk.mymdb.media.domain.Rating;
-import com.prokopchuk.mymdb.media.domain.UserRating;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +14,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.prokopchuk.mymdb.common.domain.value.FilmId;
+import com.prokopchuk.mymdb.common.domain.value.UserId;
+import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
+import com.prokopchuk.mymdb.common.persistence.UserFilmRatingPersistenceAdapter;
+import com.prokopchuk.mymdb.common.persistence.repo.UserFilmRatingRepo;
+import com.prokopchuk.mymdb.media.domain.Rating;
+import com.prokopchuk.mymdb.media.domain.UserRating;
 
 
 @DataJpaTest

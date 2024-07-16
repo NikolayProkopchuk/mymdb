@@ -1,5 +1,9 @@
 package com.prokopchuk.mymdb.common.persistence;
 
+import java.util.Optional;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.common.persistence.annotation.PersistenceAdapter;
 import com.prokopchuk.mymdb.common.persistence.mapper.UserUserEntityMapper;
@@ -8,10 +12,8 @@ import com.prokopchuk.mymdb.common.persistence.repo.UserRepo;
 import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.user.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.user.domain.User;
-import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor

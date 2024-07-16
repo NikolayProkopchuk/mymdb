@@ -1,10 +1,11 @@
 package com.prokopchuk.mymdb.common.persistence.repo;
 
-import com.prokopchuk.mymdb.common.persistence.entity.RoleEntity;
-import com.prokopchuk.mymdb.user.domain.Role;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.prokopchuk.mymdb.common.persistence.entity.RoleEntity;
+import com.prokopchuk.mymdb.user.domain.Role;
 
 public interface RoleRepo extends JpaRepository<RoleEntity, Integer> {
 

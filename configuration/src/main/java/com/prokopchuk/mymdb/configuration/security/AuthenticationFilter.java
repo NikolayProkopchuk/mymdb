@@ -5,11 +5,6 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
-import com.prokopchuk.mymdb.user.adapter.web.dto.req.LoginUserRequestDto;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,9 +13,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
+import com.prokopchuk.mymdb.user.adapter.web.dto.req.LoginUserRequestDto;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -6,13 +6,6 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
-import com.prokopchuk.mymdb.common.persistence.UserPersistenceAdapter;
-import com.prokopchuk.mymdb.common.persistence.entity.RoleEntity;
-import com.prokopchuk.mymdb.common.persistence.repo.UserRepo;
-import com.prokopchuk.mymdb.user.domain.Role;
-import com.prokopchuk.mymdb.user.domain.Sex;
-import com.prokopchuk.mymdb.user.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -22,6 +15,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
+import com.prokopchuk.mymdb.common.persistence.UserPersistenceAdapter;
+import com.prokopchuk.mymdb.common.persistence.entity.RoleEntity;
+import com.prokopchuk.mymdb.common.persistence.repo.UserRepo;
+import com.prokopchuk.mymdb.user.domain.Role;
+import com.prokopchuk.mymdb.user.domain.Sex;
+import com.prokopchuk.mymdb.user.domain.User;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

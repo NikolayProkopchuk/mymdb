@@ -2,6 +2,9 @@ package com.prokopchuk.mymdb.common.persistence;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.prokopchuk.mymdb.common.persistence.annotation.PersistenceAdapter;
 import com.prokopchuk.mymdb.common.persistence.entity.FilmEntity;
 import com.prokopchuk.mymdb.common.persistence.mapper.FilmFilmEntityMapper;
@@ -12,8 +15,6 @@ import com.prokopchuk.mymdb.media.application.port.out.LoadFilmPort;
 import com.prokopchuk.mymdb.media.domain.Film;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 @PersistenceAdapter
 @RequiredArgsConstructor

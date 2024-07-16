@@ -1,5 +1,19 @@
 package com.prokopchuk.mymdb.user.application.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Optional;
+import java.util.Set;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
+import org.mockito.Mockito;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.user.application.exception.UserException;
 import com.prokopchuk.mymdb.user.application.port.in.command.RegisterUserCommand;
@@ -9,19 +23,6 @@ import com.prokopchuk.mymdb.user.application.service.mapper.UserCommandUserMappe
 import com.prokopchuk.mymdb.user.domain.Role;
 import com.prokopchuk.mymdb.user.domain.Sex;
 import com.prokopchuk.mymdb.user.domain.User;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
-import org.mockito.Mockito;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Optional;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 
 class UserRegisterServiceTest {
 

@@ -1,6 +1,16 @@
 package com.prokopchuk.mymdb.common.persistence.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.NaturalId;
+
 import com.prokopchuk.mymdb.user.domain.Sex;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,14 +29,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.NaturalId;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Entity
@@ -82,7 +84,9 @@ public class UserEntity {
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @ToString.Exclude
-    @JoinTable(schema = "users", name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+    @JoinTable(schema = "users",
+      name = "users_roles",
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     @Setter(AccessLevel.PRIVATE)
     private Set<RoleEntity> roles = new HashSet<>();

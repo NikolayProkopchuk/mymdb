@@ -1,7 +1,7 @@
 package com.prokopchuk.mymdb.common.persistence.repo;
 
-import com.prokopchuk.mymdb.common.persistence.entity.FilmEntity;
-import com.prokopchuk.mymdb.media.application.port.in.FilmEntityDto;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
+import com.prokopchuk.mymdb.common.persistence.entity.FilmEntity;
+import com.prokopchuk.mymdb.media.application.port.in.FilmEntityDto;
 
 
 public interface FilmRepo extends PagingAndSortingRepository<FilmEntity, Long>, JpaRepository<FilmEntity, Long> {

@@ -2,6 +2,7 @@ package com.prokopchuk.mymdb.common.persistence.entity;
 
 
 import com.prokopchuk.mymdb.media.domain.Rating;
+
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

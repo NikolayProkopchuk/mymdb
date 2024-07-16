@@ -1,9 +1,9 @@
 package com.prokopchuk.mymdb.media.application.service;
 
-import com.prokopchuk.mymdb.common.application.annotation.UseCase;
-import com.prokopchuk.mymdb.media.application.port.in.RateFilmUseCase;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.prokopchuk.mymdb.common.application.annotation.UseCase;
+import com.prokopchuk.mymdb.media.application.port.in.RateFilmUseCase;
 import com.prokopchuk.mymdb.media.application.port.in.command.RateFilmCommand;
 import com.prokopchuk.mymdb.media.application.port.out.LoadFilmPort;
 import com.prokopchuk.mymdb.media.application.port.out.RateFilmPort;

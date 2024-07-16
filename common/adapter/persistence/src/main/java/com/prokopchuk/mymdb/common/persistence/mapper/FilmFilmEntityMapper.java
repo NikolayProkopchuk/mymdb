@@ -1,10 +1,10 @@
 package com.prokopchuk.mymdb.common.persistence.mapper;
 
-import com.prokopchuk.mymdb.common.persistence.entity.FilmEntity;
 import org.mapstruct.Mapper;
-
-import com.prokopchuk.mymdb.media.domain.Film;
 import org.mapstruct.Mapping;
+
+import com.prokopchuk.mymdb.common.persistence.entity.FilmEntity;
+import com.prokopchuk.mymdb.media.domain.Film;
 
 @Mapper(uses = BaseIdToLongMapper.class)
 public interface FilmFilmEntityMapper {

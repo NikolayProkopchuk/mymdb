@@ -1,8 +1,9 @@
 package com.prokopchuk.mymdb.common.persistance;
 
-import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
-import com.prokopchuk.mymdb.common.persistence.FilmPersistenceAdapter;
-import com.prokopchuk.mymdb.media.domain.Film;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,9 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.time.LocalDate;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import com.prokopchuk.mymdb.common.persistance.config.TestConfig;
+import com.prokopchuk.mymdb.common.persistence.FilmPersistenceAdapter;
+import com.prokopchuk.mymdb.media.domain.Film;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

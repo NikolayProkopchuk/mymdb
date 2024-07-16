@@ -1,20 +1,22 @@
 package com.prokopchuk.mymdb.configuration;
 
-import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
-import com.prokopchuk.mymdb.user.application.port.out.RegisterUserPort;
-import com.prokopchuk.mymdb.user.domain.Role;
-import com.prokopchuk.mymdb.user.domain.Sex;
-import com.prokopchuk.mymdb.user.domain.User;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
+import com.prokopchuk.mymdb.user.application.port.out.RegisterUserPort;
+import com.prokopchuk.mymdb.user.domain.Role;
+import com.prokopchuk.mymdb.user.domain.Sex;
+import com.prokopchuk.mymdb.user.domain.User;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
@@ -51,7 +53,7 @@ public class Bootstrap {
             registerUserPort.registerUser(superAdmin);
         }
 
-        if(loadUserPort.loadUserByUsername("admin").isEmpty()) {
+        if (loadUserPort.loadUserByUsername("admin").isEmpty()) {
             log.info("admin user was not found and will be created with username: admin");
             var admin = User.builder()
                     .username("admin")
