@@ -8,6 +8,9 @@ import static org.mockito.BDDMockito.then;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import com.prokopchuk.mymdb.common.domain.value.FilmId;
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.media.application.port.in.command.RateFilmCommand;
@@ -16,8 +19,6 @@ import com.prokopchuk.mymdb.media.application.port.out.RateFilmPort;
 import com.prokopchuk.mymdb.media.domain.Film;
 import com.prokopchuk.mymdb.media.domain.Rating;
 import com.prokopchuk.mymdb.media.domain.UserRating;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class RateFilmServiceTest {
     private final RateFilmPort rateFilmPort = Mockito.mock(RateFilmPort.class);

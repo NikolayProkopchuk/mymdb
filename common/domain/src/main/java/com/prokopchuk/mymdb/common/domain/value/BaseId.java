@@ -14,10 +14,14 @@ public class BaseId<T> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseId<?> baseId = (BaseId<?>) o;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BaseId<?> baseId = (BaseId<?>) obj;
         return Objects.equals(value, baseId.value);
     }
 

@@ -1,11 +1,14 @@
 package com.prokopchuk.mymdb.media.adapter.web;
 
-import com.prokopchuk.mymdb.common.adapter.web.advice.MymdbExceptionHandler;
-import com.prokopchuk.mymdb.media.adapter.web.dto.req.CreateFilmRequestDto;
-import com.prokopchuk.mymdb.media.adapter.web.mapper.CreateFilmRequestToCommandMapper;
-import com.prokopchuk.mymdb.media.application.port.in.CreateFilmUseCase;
-import com.prokopchuk.mymdb.media.application.port.in.command.CreateFilmCommand;
-import jakarta.validation.ConstraintViolationException;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,14 +18,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDate;
+import com.prokopchuk.mymdb.common.adapter.web.advice.MymdbExceptionHandler;
+import com.prokopchuk.mymdb.media.adapter.web.dto.req.CreateFilmRequestDto;
+import com.prokopchuk.mymdb.media.adapter.web.mapper.CreateFilmRequestToCommandMapper;
+import com.prokopchuk.mymdb.media.application.port.in.CreateFilmUseCase;
+import com.prokopchuk.mymdb.media.application.port.in.command.CreateFilmCommand;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import jakarta.validation.ConstraintViolationException;
 
 @WebMvcTest(CreateFilmController.class)
 class CreateFilmControllerTest {

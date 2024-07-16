@@ -1,6 +1,12 @@
 package com.prokopchuk.mymdb.common.persistence.entity;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+import org.hibernate.Hibernate;
+
 import com.prokopchuk.mymdb.media.domain.Rating;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.EmbeddedId;
@@ -11,10 +17,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Table(schema = "media", name = "users_films_rating")

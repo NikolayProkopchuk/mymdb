@@ -1,5 +1,7 @@
 package com.prokopchuk.mymdb.user.application.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.prokopchuk.mymdb.common.application.annotation.UseCase;
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.user.application.exception.UserException;
@@ -9,8 +11,8 @@ import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
 import com.prokopchuk.mymdb.user.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.user.application.service.mapper.UserCommandUserMapper;
 import com.prokopchuk.mymdb.user.domain.Role;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @UseCase
 @RequiredArgsConstructor

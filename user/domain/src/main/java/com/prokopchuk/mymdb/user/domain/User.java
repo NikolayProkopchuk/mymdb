@@ -1,15 +1,15 @@
 package com.prokopchuk.mymdb.user.domain;
 
-import com.prokopchuk.mymdb.common.domain.entity.BaseEntity;
-import com.prokopchuk.mymdb.common.domain.value.UserId;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.prokopchuk.mymdb.common.domain.entity.AggregateRoot;
+import com.prokopchuk.mymdb.common.domain.value.UserId;
 
-public class User extends BaseEntity<UserId> {
+
+public class User extends AggregateRoot<UserId> {
 
     private String username;
     private String email;
@@ -47,6 +47,7 @@ public class User extends BaseEntity<UserId> {
     public void addRole(Role role) {
         roles.add(role);
     }
+
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt;

@@ -2,23 +2,27 @@ package com.prokopchuk.mymdb.common.domain.entity;
 
 import java.util.Objects;
 
-public abstract class BaseEntity<ID> {
+public abstract class BaseEntity<IDT> {
 
-    private ID id;
+    private IDT id;
 
-    public ID getId() {
+    public IDT getId() {
         return id;
     }
 
-    public void setId(ID id) {
+    public void setId(IDT id) {
         this.id = id;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BaseEntity<?> that = (BaseEntity<?>) o;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        BaseEntity<?> that = (BaseEntity<?>) obj;
         return Objects.equals(id, that.id);
     }
 

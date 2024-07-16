@@ -1,11 +1,12 @@
 package com.prokopchuk.mymdb.configuration;
 
-import com.prokopchuk.mymdb.configuration.security.UserIdArgumentResolver;
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.List;
+import com.prokopchuk.mymdb.configuration.security.UserIdArgumentResolver;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

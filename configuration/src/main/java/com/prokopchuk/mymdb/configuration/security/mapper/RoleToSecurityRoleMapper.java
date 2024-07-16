@@ -1,8 +1,9 @@
 package com.prokopchuk.mymdb.configuration.security.mapper;
 
+import org.mapstruct.Mapper;
+
 import com.prokopchuk.mymdb.configuration.security.model.SecurityRole;
 import com.prokopchuk.mymdb.user.domain.Role;
-import org.mapstruct.Mapper;
 
 @Mapper
 public interface RoleToSecurityRoleMapper {

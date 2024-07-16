@@ -1,12 +1,14 @@
 package com.prokopchuk.mymdb.user.adapter.web;
 
-import com.prokopchuk.mymdb.common.domain.value.UserId;
-import com.prokopchuk.mymdb.user.adapter.web.dto.req.RegisterUserRequestDto;
-import com.prokopchuk.mymdb.user.adapter.web.mapper.UserRequestToCommandMapper;
-import com.prokopchuk.mymdb.user.application.exception.UserException;
-import com.prokopchuk.mymdb.user.application.port.in.UserRegisterUseCase;
-import com.prokopchuk.mymdb.user.application.port.in.command.RegisterUserCommand;
-import com.prokopchuk.mymdb.user.domain.Sex;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,14 +18,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import com.prokopchuk.mymdb.common.domain.value.UserId;
+import com.prokopchuk.mymdb.user.adapter.web.dto.req.RegisterUserRequestDto;
+import com.prokopchuk.mymdb.user.adapter.web.mapper.UserRequestToCommandMapper;
+import com.prokopchuk.mymdb.user.application.exception.UserException;
+import com.prokopchuk.mymdb.user.application.port.in.UserRegisterUseCase;
+import com.prokopchuk.mymdb.user.application.port.in.command.RegisterUserCommand;
+import com.prokopchuk.mymdb.user.domain.Sex;
 
 @WebMvcTest(UserRegisterController.class)
 class UserRegisterControllerTest {

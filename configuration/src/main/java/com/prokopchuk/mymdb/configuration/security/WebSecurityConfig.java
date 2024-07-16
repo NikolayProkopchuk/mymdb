@@ -1,6 +1,5 @@
 package com.prokopchuk.mymdb.configuration.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,6 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Configuration
@@ -47,7 +48,8 @@ public class WebSecurityConfig {
                 )
                 .addFilter(authenticationFilter(authenticationManager))
                 .addFilter(new AuthorizationFilter(authenticationManager, userDetailsService))
-                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sessionManagement -> sessionManagement
+                  .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
 

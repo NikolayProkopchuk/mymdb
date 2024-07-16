@@ -1,5 +1,7 @@
 package com.prokopchuk.mymdb.common.persistence;
 
+import java.time.LocalDateTime;
+
 import com.prokopchuk.mymdb.common.persistence.annotation.PersistenceAdapter;
 import com.prokopchuk.mymdb.common.persistence.entity.UserFilmRatingEntity;
 import com.prokopchuk.mymdb.common.persistence.entity.UserFilmRatingId;
@@ -8,9 +10,8 @@ import com.prokopchuk.mymdb.common.persistence.repo.UserFilmRatingRepo;
 import com.prokopchuk.mymdb.common.persistence.repo.UserRepo;
 import com.prokopchuk.mymdb.media.application.port.out.RateFilmPort;
 import com.prokopchuk.mymdb.media.domain.UserRating;
-import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
+import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
 @RequiredArgsConstructor

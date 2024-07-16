@@ -1,12 +1,13 @@
 package com.prokopchuk.mymdb.media.application.port.in.command;
 
+import java.time.LocalDate;
+
 import com.prokopchuk.mymdb.common.application.SelfValidation;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-
-import java.time.LocalDate;
 
 @Value
 @EqualsAndHashCode(callSuper = false)

@@ -36,12 +36,48 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: "checkstyle"
+    apply plugin: "jacoco"
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
         }
     }
+
+    checkstyle {
+        configFile file("${project.rootDir}/configuration/src/main/resources/config/checkstyle.xml")
+        ignoreFailures = false
+        maxWarnings = 0
+        toolVersion = '10.3.1'
+    }
+
+    checkstyleMain {
+        print "${project.rootDir}"
+        enabled = gradle.startParameter.taskNames.contains('checkstyleMain')
+        source = 'src/main/java'
+    }
+
+    checkstyleTest {
+        enabled = gradle.startParameter.taskNames.contains('checkstyleTest')
+        source = 'src/test/java'
+    }
+
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            xml.required = true
+            csv.required = false
+            html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        }
+
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it)
+            }))
+        }
+    }
+
 }
 
 dependencies {
