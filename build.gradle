@@ -1,6 +1,7 @@
 plugins {
     id 'java-platform'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'net.researchgate.release' version '3.0.2'
 }
 
 group = 'com.prokopchuk'
@@ -95,4 +96,11 @@ dependencies {
     api platform("org.testcontainers:testcontainers:${testContainersVersion}")
     api platform("org.testcontainers:junit-jupiter:${testContainersVersion}")
     api platform("org.testcontainers:postgresql:${testContainersVersion}")
+}
+
+release {
+    tagTemplate = 'v${version}'
+    git {
+        requireBranch.set('master')
+    }
 }
