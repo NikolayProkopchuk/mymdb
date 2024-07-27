@@ -1,9 +1,6 @@
 package com.prokopchuk.mymdb.common.persistence.entity;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-
-import org.hibernate.Hibernate;
 
 import com.prokopchuk.mymdb.media.domain.Rating;
 
@@ -23,7 +20,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserFilmRatingEntity  {
+public class UserFilmRatingEntity extends CustomAbstractPersistable<UserFilmRatingId> {
 
     @EmbeddedId
     private UserFilmRatingId userFilmRatingId = new UserFilmRatingId();
@@ -45,19 +42,7 @@ public class UserFilmRatingEntity  {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || Hibernate.getClass(this) != Hibernate.getClass(obj)) {
-            return false;
-        }
-        UserFilmRatingEntity that = (UserFilmRatingEntity) obj;
-        return userFilmRatingId != null && Objects.equals(userFilmRatingId, that.userFilmRatingId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userFilmRatingId);
+    public UserFilmRatingId getId() {
+        return userFilmRatingId;
     }
 }

@@ -45,16 +45,16 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api'
     implementation 'io.jsonwebtoken:jjwt-impl'
     implementation 'io.jsonwebtoken:jjwt-jackson'
-    testImplementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-core'
     implementation 'org.apache.commons:commons-lang3'
     implementation 'jakarta.validation:jakarta.validation-api'
     implementation 'org.hibernate.validator:hibernate-validator'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation "org.testcontainers:testcontainers:${testContainersVersion}"
-    testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
-    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
+    testImplementation 'org.testcontainers:testcontainers'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
