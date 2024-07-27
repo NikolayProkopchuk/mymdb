@@ -3,10 +3,8 @@ package com.prokopchuk.mymdb.common.persistence.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
 import com.prokopchuk.mymdb.user.domain.Sex;
@@ -17,13 +15,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -36,15 +30,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class UserEntity {
-
-    @Id
-    @SequenceGenerator(name = "users_seq",
-            schema = "users",
-            sequenceName = "users_id_seq",
-            allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
-    private Long id;
+public class UserEntity extends CustomAbstractEntity<Long> {
 
     @Column(nullable = false, unique = true)
     @NaturalId
@@ -93,22 +79,5 @@ public class UserEntity {
 
     public void addRole(RoleEntity role) {
         roles.add(role);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || Hibernate.getClass(this) != Hibernate.getClass(obj)) {
-            return false;
-        }
-        UserEntity that = (UserEntity) obj;
-        return username != null && Objects.equals(username, that.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username);
     }
 }

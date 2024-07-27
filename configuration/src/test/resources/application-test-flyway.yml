@@ -3,3 +3,13 @@ spring:
     url: jdbc:tc:postgresql:12:///mymdb
     username: postgres
     password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc.batch_size: 50
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
