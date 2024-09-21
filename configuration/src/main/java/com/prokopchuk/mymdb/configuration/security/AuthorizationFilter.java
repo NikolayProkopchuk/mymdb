@@ -3,6 +3,7 @@ package com.prokopchuk.mymdb.configuration.security;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +28,9 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain chain)
         throws IOException, ServletException {
-        String token = req.getHeader(SecurityConstants.HEADER_STRING);
+        String token = req.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (token == null || !token.startsWith("Bearer")) {
+        if (token == null || !token.startsWith(SecurityConstants.TOKEN_PREFIX)) {
             chain.doFilter(req, resp);
             return;
         }

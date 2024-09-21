@@ -1,19 +1,40 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.3' apply false
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
 dependencies {
     implementation platform(rootProject)
     implementation project(':user:domain-user')
     implementation project(':common:domain')
     implementation project(':common:application')
+
     implementation 'org.mapstruct:mapstruct'
 
     compileOnly 'org.projectlombok:lombok'
+
     implementation 'org.springframework:spring-context'
     implementation 'org.springframework.security:spring-security-crypto'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
             "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add("-parameters")
 }
 
 compileJava {

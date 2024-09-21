@@ -1,4 +1,9 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'jakarta.validation:jakarta.validation-api'
+    implementation 'org.projectlombok:lombok'
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
+            "org.projectlombok:lombok:${lombokVersion}",
+            "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 }

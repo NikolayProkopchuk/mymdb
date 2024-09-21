@@ -13,11 +13,9 @@ import lombok.Value;
 @EqualsAndHashCode(callSuper = false)
 public class CreateFilmCommand extends SelfValidation<CreateFilmCommand> {
 
-    @NotNull
     @NotBlank
     String name;
 
-    @NotNull
     @NotBlank
     String description;
 

@@ -35,17 +35,18 @@ class RateFilmServiceTest {
     void shouldCreateUserFilmRating() {
         FilmId filmId = new FilmId(1L);
         UserId userId = new UserId(1L);
+        Rating rating = Rating.ONE;
 
         var rateFilmCommand = new RateFilmCommand(
                 filmId,
                 userId,
-                1
+                rating
         );
 
         var userFilmRating = new UserRating(
           userId,
           filmId,
-          Rating.getInstance(rateFilmCommand.getRating())
+          rating
         );
 
         Film film = Film.builder()
@@ -64,12 +65,13 @@ class RateFilmServiceTest {
     void shouldThrowExceptionWhenFilmIsNotExist() {
         FilmId filmId = new FilmId(1L);
         UserId userId = new UserId(1L);
+        Rating rating = Rating.ONE;
         given(loadFilmPort.loadFilmById(filmId.getValue())).willReturn(Optional.empty());
 
         var rateFilmCommand = new RateFilmCommand(
           filmId,
           userId,
-          1
+          rating
         );
 
         assertThrows(NoSuchElementException.class, () -> rateFilmService.rate(rateFilmCommand));
