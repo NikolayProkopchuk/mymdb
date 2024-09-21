@@ -2,6 +2,11 @@ package com.prokopchuk.mymdb.media.adapter.web.dto.req;
 
 import java.time.LocalDate;
 
-public record CreateFilmRequestDto(String name, String description, LocalDate productionDate) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
+public record CreateFilmRequestDto(
+  @NotBlank String name,
+  @NotBlank String description,
+  @NotNull LocalDate productionDate) {
 }

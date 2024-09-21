@@ -5,6 +5,7 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -57,6 +58,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
           .signWith(key)
           .compact();
 
-        resp.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+        resp.addHeader(HttpHeaders.AUTHORIZATION, SecurityConstants.TOKEN_PREFIX + token);
     }
 }

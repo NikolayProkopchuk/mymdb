@@ -3,9 +3,8 @@ package com.prokopchuk.mymdb.media.application.port.in.command;
 import com.prokopchuk.mymdb.common.application.SelfValidation;
 import com.prokopchuk.mymdb.common.domain.value.FilmId;
 import com.prokopchuk.mymdb.common.domain.value.UserId;
+import com.prokopchuk.mymdb.media.domain.Rating;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,11 +20,11 @@ public class RateFilmCommand extends SelfValidation<RateFilmCommand> {
     private final UserId userId;
 
     @NotNull
-    @Min(0)
-    @Max(10)
-    private final Integer rating;
+    private final Rating rating;
 
-    public RateFilmCommand(FilmId filmId, UserId userId, Integer rating) {
+    public RateFilmCommand(FilmId filmId,
+                           UserId userId,
+                           Rating rating) {
         this.filmId = filmId;
         this.userId = userId;
         this.rating = rating;

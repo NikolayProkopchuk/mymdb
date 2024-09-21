@@ -8,22 +8,21 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.core.convert.ConversionService;
 
 import com.prokopchuk.mymdb.common.domain.value.FilmId;
 import com.prokopchuk.mymdb.media.application.port.in.command.CreateFilmCommand;
 import com.prokopchuk.mymdb.media.application.port.out.CreateFilmPort;
-import com.prokopchuk.mymdb.media.application.service.mapper.CreateFilmCommandToFilmMapper;
 import com.prokopchuk.mymdb.media.domain.Film;
 
 class CreateFilmServiceTest {
 
     private final CreateFilmPort createFilmPort = Mockito.mock(CreateFilmPort.class);
 
-    private final CreateFilmCommandToFilmMapper createFilmCommandToFilmMapper = Mockito.mock(
-      CreateFilmCommandToFilmMapper.class);
+    private final ConversionService conversionService = Mockito.mock(ConversionService.class);
 
     private final CreateFilmService createFilmService =
-      new CreateFilmService(createFilmPort, createFilmCommandToFilmMapper);
+      new CreateFilmService(createFilmPort, conversionService);
 
     @Test
     void shouldCreateFilmAndReturnItsId() {
@@ -50,12 +49,12 @@ class CreateFilmServiceTest {
           .productionDate(productionDate)
           .build();
 
-        given(createFilmCommandToFilmMapper.createFilmCommandToFilm(createFilmCommand)).willReturn(film);
+        given(conversionService.convert(createFilmCommand, Film.class)).willReturn(film);
         given(createFilmPort.createFilm(film)).willReturn(createdFilm);
 
         assertThat(createFilmService.createFilm(createFilmCommand)).isEqualTo(createdFilmId);
 
-        then(createFilmCommandToFilmMapper).should().createFilmCommandToFilm(createFilmCommand);
+        then(conversionService).should().convert(createFilmCommand, Film.class);
         then(createFilmPort).should().createFilm(film);
     }
 }

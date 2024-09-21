@@ -4,11 +4,15 @@ import java.time.LocalDate;
 
 import com.prokopchuk.mymdb.user.domain.Sex;
 
-public record RegisterUserRequestDto(String username,
-                                     String email,
-                                     String password,
-                                     Sex sex,
-                                     String firstName,
-                                     String lastName,
-                                     LocalDate birthday) {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record RegisterUserRequestDto(@NotBlank String username,
+                                     @NotBlank @Email String email,
+                                     @NotBlank String password,
+                                     @NotNull Sex sex,
+                                     @NotBlank String firstName,
+                                     @NotBlank String lastName,
+                                     @NotNull LocalDate birthday) {
 }

@@ -15,13 +15,17 @@ dependencyManagement {
 
 dependencies {
     implementation platform(rootProject)
-    implementation project(':user:application-user')
     implementation project(':common:domain')
-    implementation project(':user:domain-user')
+    implementation project(':common:application')
     implementation project(':common:adapter:web')
+    implementation project(':user:domain-user')
+    implementation project(':user:application-user')
+    implementation 'jakarta.validation:jakarta.validation-api'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mapstruct:mapstruct'
     implementation 'org.projectlombok:lombok'
+    implementation "org.mapstruct.extensions.spring:mapstruct-spring-annotations:${mapstructSpringExtensionsVersion}"
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
@@ -29,12 +33,17 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
             "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    annotationProcessor "org.mapstruct.extensions.spring:mapstruct-spring-extensions:${mapstructSpringExtensionsVersion}"
 }
 
 compileJava {
     options.compilerArgs += [
             '-Amapstruct.defaultComponentModel=spring',
     ]
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add("-parameters")
 }
 
 test {

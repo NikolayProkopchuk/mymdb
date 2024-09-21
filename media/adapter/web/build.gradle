@@ -24,13 +24,15 @@ dependencies {
     implementation 'jakarta.validation:jakarta.validation-api'
     implementation 'org.mapstruct:mapstruct'
     implementation 'org.projectlombok:lombok'
+    implementation "org.mapstruct.extensions.spring:mapstruct-spring-annotations:${mapstructSpringExtensionsVersion}"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
-            "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+            "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}",
+            "org.mapstruct.extensions.spring:mapstruct-spring-extensions:${mapstructSpringExtensionsVersion}"
 }
 
 compileJava {

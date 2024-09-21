@@ -11,18 +11,19 @@ javaPlatform {
 }
 
 ext {
-    apacheCommonsVersion = '3.14.0'
-    jakartaValidationVersion = '3.0.2'
+    apacheCommonsVersion = '3.15.0'
+    jakartaValidationVersion = '3.1.0'
     hibernateValidatorVersion = '8.0.1.Final'
     mapstructVersion = '1.6.0.Beta1'
-    lombokVersion = '1.18.32'
+    lombokVersion = '1.18.34'
     lombokMapstructBindingVersion = '0.2.0'
     springBootVersion = '3.2.3'
     postgresqlVersion = '42.7.3'
-    jsonwebtokenVersion = '0.12.5'
-    flywayVersion = '10.11.0'
-    flywayDatabasePostgresVersion = '10.13.0'
-    testContainersVersion = '1.19.8'
+    jsonwebtokenVersion = '0.12.6'
+    flywayVersion = '10.15.2'
+    flywayDatabasePostgresVersion = '10.14.0'
+    testContainersVersion = '1.20.0'
+    mapstructSpringExtensionsVersion = '1.1.2'
 }
 
 allprojects {

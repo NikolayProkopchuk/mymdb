@@ -14,19 +14,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import lombok.RequiredArgsConstructor;
-
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final UserDetailsService userDetailsService;
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, BCryptPasswordEncoder passwordEncoder)
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity,
+                                           BCryptPasswordEncoder passwordEncoder,
+                                           UserDetailsService userDetailsService)
             throws Exception {
         var authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
 
@@ -40,7 +37,7 @@ public class WebSecurityConfig {
                 .authenticationManager(authenticationManager)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        auths -> auths.requestMatchers(HttpMethod.GET, "/films/*").permitAll()
+                        auths -> auths.requestMatchers(HttpMethod.GET, "/films/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
                                 .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                                 .anyRequest()

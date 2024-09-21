@@ -27,7 +27,7 @@ import com.prokopchuk.mymdb.user.domain.User;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = TestConfig.class)
-@Import(UserPersistenceAdapter.class)
+@Import({UserPersistenceAdapter.class})
 @Testcontainers
 @ActiveProfiles("test-flyway")
 class UserPersistenceAdapterTest {

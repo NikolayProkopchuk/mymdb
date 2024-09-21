@@ -1,5 +1,6 @@
 package com.prokopchuk.mymdb.configuration;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -9,11 +10,11 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.configuration.security.UserDetailsServiceImpl;
-import com.prokopchuk.mymdb.configuration.security.mapper.UserToSecurityUserDetailsMapper;
 import com.prokopchuk.mymdb.configuration.security.model.SecurityRole;
 import com.prokopchuk.mymdb.configuration.security.model.SecurityUserDetails;
 import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
@@ -52,12 +53,12 @@ public class SpringSecurityWebAuxTestConfig {
           .build();
 
         LoadUserPort loadUserPort = Mockito.mock(LoadUserPort.class);
-        UserToSecurityUserDetailsMapper userToSecurityUserDetailsMapper =
-          Mockito.mock(UserToSecurityUserDetailsMapper.class);
+        ConversionService conversionService = Mockito.mock(ConversionService.class);
 
         when(loadUserPort.loadUserByUsername("testUser")).thenReturn(Optional.of(basicUser));
-        when(userToSecurityUserDetailsMapper.userToUserDetailsDto(basicUser)).thenReturn(userDetails);
+        doReturn(userDetails)
+          .when(conversionService).convert(basicUser, SecurityUserDetails.class);
 
-        return new UserDetailsServiceImpl(loadUserPort, userToSecurityUserDetailsMapper);
+        return new UserDetailsServiceImpl(loadUserPort, conversionService);
     }
 }

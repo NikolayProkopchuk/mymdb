@@ -7,7 +7,6 @@ import com.prokopchuk.mymdb.media.application.port.in.RateFilmUseCase;
 import com.prokopchuk.mymdb.media.application.port.in.command.RateFilmCommand;
 import com.prokopchuk.mymdb.media.application.port.out.LoadFilmPort;
 import com.prokopchuk.mymdb.media.application.port.out.RateFilmPort;
-import com.prokopchuk.mymdb.media.domain.Rating;
 import com.prokopchuk.mymdb.media.domain.UserRating;
 
 import lombok.RequiredArgsConstructor;
@@ -23,13 +22,12 @@ public class RateFilmService implements RateFilmUseCase {
     @Override
     @Transactional
     public UserRating rate(RateFilmCommand rateFilmCommand) {
-        Rating rating = Rating.getInstance(rateFilmCommand.getRating());
         loadFilmPort.loadFilmById(rateFilmCommand.getFilmId().getValue())
                 .orElseThrow();
         UserRating userRating = new UserRating(
           rateFilmCommand.getUserId(),
           rateFilmCommand.getFilmId(),
-          rating
+          rateFilmCommand.getRating()
         );
 
         return rateFilmPort.rate(userRating);

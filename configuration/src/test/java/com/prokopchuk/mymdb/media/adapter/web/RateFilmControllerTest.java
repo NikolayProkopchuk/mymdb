@@ -20,7 +20,7 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.prokopchuk.mymdb.common.adapter.web.advice.MymdbExceptionHandler;
+import com.prokopchuk.mymdb.common.adapter.web.advice.MymdbGlobalExceptionHandler;
 import com.prokopchuk.mymdb.common.domain.value.FilmId;
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.configuration.SpringSecurityWebAuxTestConfig;
@@ -33,7 +33,7 @@ import com.prokopchuk.mymdb.media.domain.Rating;
 @WebMvcTest(RateFilmController.class)
 @SpringJUnitWebConfig(classes = {WebConfig.class, WebSecurityConfig.class, SpringSecurityWebAuxTestConfig.class})
 @AutoConfigureMockMvc
-@Import({RateFilmController.class, MymdbExceptionHandler.class})
+@Import({RateFilmController.class, MymdbGlobalExceptionHandler.class})
 class RateFilmControllerTest {
 
     @Autowired
@@ -69,7 +69,7 @@ class RateFilmControllerTest {
         RateFilmCommand rateFilmCommand = new RateFilmCommand(
           filmId,
           userId,
-          rating.getValue()
+          rating
         );
 
         mockMvc

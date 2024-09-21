@@ -7,6 +7,7 @@ import com.prokopchuk.mymdb.common.application.annotation.UseCase;
 import com.prokopchuk.mymdb.media.application.port.in.FilmDtoQuery;
 import com.prokopchuk.mymdb.media.application.port.in.FilmEntityDto;
 import com.prokopchuk.mymdb.media.application.port.out.LoadFilmPort;
+import com.prokopchuk.mymdb.media.application.service.exception.FilmNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +25,7 @@ class FilmService implements FilmDtoQuery {
 
     @Override
     public FilmEntityDto getFilm(Long id) {
-        return loadFilmPort.loadFilmEntityDtoById(id).orElseThrow();
+        return loadFilmPort.loadFilmEntityDtoById(id)
+          .orElseThrow(() -> new FilmNotFoundException(String.format("Film with id: %d not found", id)));
     }
 }
