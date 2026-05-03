@@ -9,6 +9,7 @@ plugins {
 dependencyManagement {
     imports {
         mavenBom SpringBootPlugin.BOM_COORDINATES
+        mavenBom "org.testcontainers:testcontainers-bom:${testContainersVersion}"
     }
 }
 

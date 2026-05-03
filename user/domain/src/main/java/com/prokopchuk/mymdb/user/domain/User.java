@@ -23,123 +23,86 @@ public class User extends AggregateRoot<UserId> {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-
     private Set<Role> roles = new HashSet<>();
 
     private User(Builder builder) {
         setId(builder.id);
-        setUsername(builder.username);
-        setEmail(builder.email);
-        setPassword(builder.password);
-        setSex(builder.sex);
-        setFirstName(builder.firstName);
-        setLastName(builder.lastName);
-        setBirthday(builder.birthday);
-        setAccountNonExpired(builder.accountNonExpired);
-        setAccountNonLocked(builder.accountNonLocked);
-        setCredentialsNonExpired(builder.credentialsNonExpired);
-        setEnabled(builder.enabled);
-        roles = builder.roles;
-        createdAt = builder.createdAt;
-        updatedAt = builder.updatedAt;
+        this.username = builder.username;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.sex = builder.sex;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.birthday = builder.birthday;
+        this.accountNonExpired = builder.accountNonExpired;
+        this.accountNonLocked = builder.accountNonLocked;
+        this.credentialsNonExpired = builder.credentialsNonExpired;
+        this.enabled = builder.enabled;
+        this.roles = builder.roles != null ? new HashSet<>(builder.roles) : new HashSet<>();
+        this.createdAt = builder.createdAt != null ? builder.createdAt : LocalDateTime.now();
+        this.updatedAt = builder.updatedAt;
     }
 
     public void addRole(Role role) {
         roles.add(role);
     }
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    public void initializeOnRegistration(String hashedPassword) {
+        password = hashedPassword;
+        roles.add(Role.ROLE_USER);
+        accountNonExpired = true;
+        accountNonLocked = true;
+        credentialsNonExpired = true;
+        enabled = true;
+    }
+
+    private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
-
 
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Sex getSex() {
         return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
     public boolean isAccountNonExpired() {
         return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
     }
 
     public boolean isAccountNonLocked() {
         return accountNonLocked;
     }
 
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
     public boolean isCredentialsNonExpired() {
         return credentialsNonExpired;
     }
 
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public Set<Role> getRoles() {

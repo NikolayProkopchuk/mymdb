@@ -1,6 +1,6 @@
 plugins {
     id 'java-platform'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'io.spring.dependency-management' version '1.1.4' apply false
     id 'net.researchgate.release' version '3.0.2'
 }
 
@@ -11,18 +11,18 @@ javaPlatform {
 }
 
 ext {
-    apacheCommonsVersion = '3.15.0'
+    apacheCommonsVersion = '3.18.0'
     jakartaValidationVersion = '3.1.0'
     hibernateValidatorVersion = '8.0.1.Final'
     mapstructVersion = '1.6.0.Beta1'
-    lombokVersion = '1.18.34'
+    lombokVersion = '1.18.36'
     lombokMapstructBindingVersion = '0.2.0'
     springBootVersion = '3.2.3'
     postgresqlVersion = '42.7.3'
     jsonwebtokenVersion = '0.12.6'
-    flywayVersion = '10.15.2'
-    flywayDatabasePostgresVersion = '10.14.0'
-    testContainersVersion = '1.20.0'
+    flywayVersion = '10.21.0'
+    flywayDatabasePostgresVersion = '10.21.0'
+    testContainersVersion = '1.21.4'
     mapstructSpringExtensionsVersion = '1.1.2'
 }
 
@@ -34,7 +34,6 @@ allprojects {
 
 subprojects {
     group = 'com.prokopchuk'
-    version = '1.1.3-SNAPSHOT'
 
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
