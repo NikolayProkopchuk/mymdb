@@ -5,6 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.extensions.spring.DelegatingConverter;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 
 import com.prokopchuk.mymdb.common.persistence.entity.UserEntity;
 import com.prokopchuk.mymdb.user.domain.User;
@@ -15,7 +16,7 @@ public interface UserUserEntityMapper extends Converter<User, UserEntity> {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "roles", ignore = true)
-    UserEntity convert(User user);
+    UserEntity convert(@NonNull User user);
 
     @InheritInverseConfiguration
     @DelegatingConverter

@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.prokopchuk.mymdb.common.domain.value.UserId;
 import com.prokopchuk.mymdb.user.application.exception.UserNotUniqueException;
 import com.prokopchuk.mymdb.user.application.port.in.command.RegisterUserCommand;
 import com.prokopchuk.mymdb.user.application.port.out.LoadUserPort;
+import com.prokopchuk.mymdb.user.application.port.out.PasswordHashingPort;
 import com.prokopchuk.mymdb.user.application.port.out.RegisterUserPort;
 import com.prokopchuk.mymdb.user.domain.Role;
 import com.prokopchuk.mymdb.user.domain.Sex;
@@ -32,7 +32,7 @@ class UserRegisterServiceTest {
 
     private final ConversionService conversionService = Mockito.mock(ConversionService.class);
 
-    private final BCryptPasswordEncoder passwordEncoder = Mockito.mock(BCryptPasswordEncoder.class);
+    private final PasswordHashingPort passwordEncoder = Mockito.mock(PasswordHashingPort.class);
 
 
     private final UserRegisterService registerUserService = new UserRegisterService(
